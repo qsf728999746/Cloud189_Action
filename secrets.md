@@ -16,7 +16,7 @@
 | :----------------------- | :-------------------------: | :----------------------------------------------------------: |
 | `PJ_COOKIE`              |          吾爱破解           |                            cookie                            |
 | `CSDN_COOKIE`            |            CSDN             |                            cookie                            |
-| TYYP_USRNAME             |          天翼云盘           |                        账号（手机号）                        |
+| TYYP_USERNAME             |          天翼云盘           |                        账号（手机号）                        |
 | TYYP_PSW                 |          天翼云盘           |                       密码（不能有&）                        |
 | TOOLLU_COOKIE            | 在线工具（https://tool.lu） |                            cookie                            |
 | WPS_COOKIE               |             WPS             |                            cookie                            |
