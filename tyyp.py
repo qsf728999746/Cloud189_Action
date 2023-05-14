@@ -107,7 +107,7 @@ def tyyp_signin():
             #QYWX_Notify().send('天翼云盘签到错误', '账号密码数量不匹配')
             printf('天翼云盘签到错误', '账号密码数量不匹配!')
             raise Exception
-        for i in range(len(un)):
+        for i in range(len(un)-1):
             login(un[i], psw[i])
             rand = str(round(time.time() * 1000))
             surl = f'https://api.cloud.189.cn/mkt/userSign.action?rand={rand}&clientType=TELEANDROID&version=8.6.3&model=SM-G930K'
