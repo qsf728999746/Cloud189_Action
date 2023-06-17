@@ -47,12 +47,11 @@ for i in range(len(ty_username)):
 
     #推送函数
     
-    def Push(contents):
+    #def Push(contents):
         # 推送加
-        headers = {'Content-Type': 'application/json'}
-        json = {"token": plustoken, 'title': '天翼云签到', 'content': contents.replace('\n', '<br>'), "template": "json"}
-        resp = requests.post(f'http://www.pushplus.plus/send', json=json, headers=headers).json()
-        print('push+推送成功' if resp['code'] == 200 else 'push+推送失败')
+    #    json = {"token": plustoken, 'title': '天翼云签到', 'content': contents.replace('\n', '<br>'), "template": "json"}
+    #    resp = requests.post(f'http://www.pushplus.plus/send', json=json, headers=headers).json()
+    #    print('push+推送成功' if resp['code'] == 200 else 'push+推送失败')
     def int2char(a):
         return BI_RM[a]
 
@@ -210,20 +209,20 @@ for i in range(len(ty_username)):
             description = response.json()['description']
             print(f"链接3抽奖获得{description}")
             res4 = f"链接3抽奖获得{description}"
-        message = res1+res2+res3+res4
-        Push(contents=message)
+        #message = res1+res2+res3+res4
+        #Push(contents=message)
 
 
-    def lambda_handler(event, context):  # aws default
-        main()
+    #def lambda_handler(event, context):  # aws default
+    #    main()
 
 
-    def main_handler(event, context):  # tencent default
-        main()
+    #def main_handler(event, context):  # tencent default
+     #   main()
 
 
-    def handler(event, context):  # aliyun default
-        main()
+    #def handler(event, context):  # aliyun default
+    #    main()
 
 
     if __name__ == "__main__":
