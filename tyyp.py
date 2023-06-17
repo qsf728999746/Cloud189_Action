@@ -107,7 +107,7 @@ def tyyp_signin():
             #QYWX_Notify().send('天翼云盘签到错误', '账号密码数量不匹配')
             printf('天翼云盘签到错误', '账号密码数量不匹配!')
             raise Exception
-        for i in range(len(un)-1):
+        for i in range(len(un)):
             login(un[i], psw[i])
             rand = str(round(time.time() * 1000))
             surl = f'https://api.cloud.189.cn/mkt/userSign.action?rand={rand}&clientType=TELEANDROID&version=8.6.3&model=SM-G930K'
@@ -123,8 +123,10 @@ def tyyp_signin():
             netdiskBonus = response.json()['netdiskBonus']
             if response.json()['isSign'] == "false":                
                 res1 = f"未签到，签到获得{netdiskBonus}M空间"
+                printf(res1)
             else:               
                 res1 = f"已经签到过了，签到获得{netdiskBonus}M空间"
+                printf(res1)
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G930K Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Ecloud/8.6.3 Android/22 clientId/355325117317828 clientModel/SM-G930K imsi/460071114317824 clientChannelId/qq proVersion/1.0.6',
                 "Referer": "https://m.cloud.189.cn/zhuanti/2016/sign/index.jsp?albumBackupOpened=1",
