@@ -34,10 +34,10 @@ public class ECloudSigner {
             boolean signSuccess = performSign(client, cookie);
 
             if (signSuccess) {
-                // 4. 如果签到成功（或已签到），尝试抽奖
-                performDraw(client, cookie, "第一次抽奖", DRAW_URL_1);
+                // 4. 如果签到成功（或已签到），尝试抽奖。需要有抽奖次数，不搞了。
+                /*performDraw(client, cookie, "第一次抽奖", DRAW_URL_1);
                 performDraw(client, cookie, "第二次抽奖", DRAW_URL_2);
-                performDraw(client, cookie, "第三次抽奖", DRAW_URL_3);
+                performDraw(client, cookie, "第三次抽奖", DRAW_URL_3);*/
             } else {
                 System.out.println("签到失败，跳过抽奖。");
             }
