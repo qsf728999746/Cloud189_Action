@@ -3,6 +3,8 @@ import com.google.gson.JsonParser;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ECloudSigner {
@@ -12,8 +14,13 @@ public class ECloudSigner {
     private static final String DRAW_URL_2 = "https://m.cloud.189.cn/v2/drawPrizeMarketDetails.action?taskId=TASK_SIGNIN_PHOTOS&activityId=ACT_SIGNIN";
     private static final String DRAW_URL_3 = "https://m.cloud.189.cn/v2/drawPrizeMarketDetails.action?taskId=TASK_2022_FLDFS_KJ&activityId=ACT_SIGNIN";
 
-    // 模拟手机端 User-Agent，天翼云对移动端接口支持较好
-    private static final String USER_AGENT = "Mozilla/5.0 (Linux; Android 5.1.1; SM-G930K Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Ecloud/8.6.3 Android/22 clientId/355325117317828 clientModel/SM-G930K imsi/460071114317824 clientChannelId/qq proVersion/1.0.6";
+    private static final List<String> USER_AGENTS = new ArrayList<>();
+    static {
+        USER_AGENTS.add("Mozilla/5.0 (Linux; Android 5.1.1; SM-G930K Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Ecloud/8.6.3 Android/22 clientId/355325117317828 clientModel/SM-G930K imsi/460071114317824 clientChannelId/qq proVersion/1.0.6");
+        USER_AGENTS.add("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15");
+    }
+    private static final Integer USE_AGENT = 1;
+
 
     public static void main(String[] args) {
         // 1. 从环境变量获取 Cookie
@@ -33,14 +40,14 @@ public class ECloudSigner {
             // 3. 执行签到
             boolean signSuccess = performSign(client, cookie);
 
-            if (signSuccess) {
+            /*if (signSuccess) {
                 // 4. 如果签到成功（或已签到），尝试抽奖。需要有抽奖次数，不搞了。
-                /*performDraw(client, cookie, "第一次抽奖", DRAW_URL_1);
+                performDraw(client, cookie, "第一次抽奖", DRAW_URL_1);
                 performDraw(client, cookie, "第二次抽奖", DRAW_URL_2);
-                performDraw(client, cookie, "第三次抽奖", DRAW_URL_3);*/
+                performDraw(client, cookie, "第三次抽奖", DRAW_URL_3);
             } else {
                 System.out.println("签到失败，跳过抽奖。");
-            }
+            }*/
 
         } catch (Exception e) {
             System.err.println("运行出错: " + e.getMessage());
@@ -59,7 +66,7 @@ public class ECloudSigner {
         Request request = new Request.Builder()
                 .url(url)
                 .get()
-                .addHeader("User-Agent", USER_AGENT)
+                .addHeader("User-Agent", USER_AGENTS.get(USE_AGENT))
                 .addHeader("Referer", "https://m.cloud.189.cn/zhuanti/2016/sign/index.jsp?albumBackupOpened=1")
                 .addHeader("Host", "m.cloud.189.cn")
                 .addHeader("Accept", "application/json;charset=UTF-8")
@@ -103,7 +110,7 @@ public class ECloudSigner {
         Request request = new Request.Builder()
                 .url(url)
                 .get()
-                .addHeader("User-Agent", USER_AGENT)
+                .addHeader("User-Agent", USER_AGENTS.get(USE_AGENT))
                 .addHeader("Referer", "https://m.cloud.189.cn/zhuanti/2016/sign/index.jsp?albumBackupOpened=1")
                 .addHeader("Host", "m.cloud.189.cn")
                 .addHeader("Accept", "application/json;charset=UTF-8")
